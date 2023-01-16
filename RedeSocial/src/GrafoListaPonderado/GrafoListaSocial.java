@@ -10,14 +10,20 @@ public class GrafoListaSocial {
 
     private ArrayList<Pessoa> pessoas;
     private boolean direcionado;
+    private int ids;
 
     public GrafoListaSocial() {
         this.direcionado = true;
         this.pessoas = new ArrayList<>();
+        ids = 0;
+    }
 
+    public int novoID() {
+        return this.ids += 1;
     }
 
     public void adicionarPessoa(Pessoa pessoa) {
+        pessoa.setId(novoID());
         this.pessoas.add(pessoa);
     }
 
@@ -40,6 +46,18 @@ public class GrafoListaSocial {
 
     public ArrayList<Pessoa> getPessoas() {
         return pessoas;
+    }
+
+    public Pessoa getPessoaPorId(String id) {
+
+        for (Pessoa v : this.pessoas) {
+            if (v.getId().equals(id)) {
+                return v;
+            }
+        }
+
+        return null;
+
     }
 
     public Pessoa getPessoaPorNome(String nome) {

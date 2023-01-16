@@ -5,10 +5,12 @@ import java.util.LinkedList;
 
 public class Pessoa {
 
+    private Integer id;
     private String nome;
     private String email;
     private Date nascnimento;
     private LinkedList<Amizade> amigos;
+    private boolean ativo;
 
     public Pessoa(String nome) {
         this.nome = nome;
@@ -27,6 +29,14 @@ public class Pessoa {
 
     public LinkedList<Amizade> getAmizades() {
         return amigos;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -51,6 +61,14 @@ public class Pessoa {
 
     public void setNascnimento(Date nascnimento) {
         this.nascnimento = nascnimento;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
 }
