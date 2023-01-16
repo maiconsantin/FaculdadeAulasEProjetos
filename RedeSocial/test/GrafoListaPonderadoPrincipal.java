@@ -18,20 +18,20 @@ public class GrafoListaPonderadoPrincipal {
 
         GrafoListaSocial graf = new GrafoListaSocial();
 
-        Pessoa a = new Pessoa("A");
-        Pessoa b = new Pessoa("B");
-        Pessoa c = new Pessoa("C");
-        Pessoa d = new Pessoa("D");
-        Pessoa e = new Pessoa("E");
-        Pessoa f = new Pessoa("F");
-        Pessoa g = new Pessoa("G");
-        Pessoa h = new Pessoa("H");
-        Pessoa i = new Pessoa("I");
-        Pessoa j = new Pessoa("J");
-        Pessoa k = new Pessoa("K");
-        Pessoa l = new Pessoa("L");
-        Pessoa m = new Pessoa("M");
-        Pessoa n = new Pessoa("N");
+        Pessoa a = new Pessoa();
+        Pessoa b = new Pessoa();
+        Pessoa c = new Pessoa();
+        Pessoa d = new Pessoa();
+        Pessoa e = new Pessoa();
+        Pessoa f = new Pessoa();
+        Pessoa g = new Pessoa();
+        Pessoa h = new Pessoa();
+        Pessoa i = new Pessoa();
+        Pessoa j = new Pessoa();
+        Pessoa k = new Pessoa();
+        Pessoa l = new Pessoa();
+        Pessoa m = new Pessoa();
+        Pessoa n = new Pessoa();
 
         graf.adicionarPessoa(a);
         graf.adicionarPessoa(b);

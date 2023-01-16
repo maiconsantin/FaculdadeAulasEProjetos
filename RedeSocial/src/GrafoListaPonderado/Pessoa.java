@@ -12,8 +12,14 @@ public class Pessoa {
     private LinkedList<Amizade> amigos;
     private boolean ativo;
 
-    public Pessoa(String nome) {
+    public Pessoa() {
+        this.amigos = new LinkedList<>();
+    }
+
+    public Pessoa(String nome, String email, Date nascnimento) {
         this.nome = nome;
+        this.email = email;
+        this.nascnimento = nascnimento;
         this.amigos = new LinkedList<>();
     }
 
