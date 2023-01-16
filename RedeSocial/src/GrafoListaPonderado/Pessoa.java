@@ -1,12 +1,13 @@
 package GrafoListaPonderado;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class Pessoa {
 
     private String nome;
     private String email;
-    
+    private Date nascnimento;
     private LinkedList<Amizade> amigos;
 
     public Pessoa(String nome) {
@@ -42,6 +43,14 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getNascnimento() {
+        return nascnimento;
+    }
+
+    public void setNascnimento(Date nascnimento) {
+        this.nascnimento = nascnimento;
     }
 
 }

@@ -8,17 +8,17 @@ import java.util.Queue;
 
 public class GrafoListaSocial {
 
-    private ArrayList<Pessoa> vertices;
+    private ArrayList<Pessoa> pessoas;
     private boolean direcionado;
 
     public GrafoListaSocial() {
         this.direcionado = true;
-        this.vertices = new ArrayList<>();
+        this.pessoas = new ArrayList<>();
 
     }
 
-    public void adicionarPessoa(Pessoa vertice) {
-        this.vertices.add(vertice);
+    public void adicionarPessoa(Pessoa pessoa) {
+        this.pessoas.add(pessoa);
     }
 
     public void adicionarAmizade(Pessoa origem, Pessoa destino) {
@@ -32,21 +32,31 @@ public class GrafoListaSocial {
 
     }
 
+    public void removerPessoa(Pessoa pessoa) {
 
-    public void removerPessoa(Pessoa vertice) {
-
-        this.vertices.remove(vertice);
+        this.pessoas.remove(pessoa);
 
     }
 
     public ArrayList<Pessoa> getPessoas() {
-        return vertices;
+        return pessoas;
     }
 
     public Pessoa getPessoaPorNome(String nome) {
 
-        for (Pessoa v : this.vertices) {
+        for (Pessoa v : this.pessoas) {
             if (v.getNome() == nome) {
+                return v;
+            }
+        }
+
+        return null;
+
+    }
+
+    public Pessoa getPessoaPorEmail(String email) {
+        for (Pessoa v : this.pessoas) {
+            if (v.getEmail() == email) {
                 return v;
             }
         }
@@ -57,9 +67,9 @@ public class GrafoListaSocial {
 
     public void buscarLarcura(Pessoa inicio) {
 
-        ArrayList<Pessoa> verticesVisitados = new ArrayList<>();
+        ArrayList<Pessoa> pessoasVisitados = new ArrayList<>();
 
-        verticesVisitados.add(inicio);
+        pessoasVisitados.add(inicio);
 
         Queue<Pessoa> visitadosFila = new LinkedList<>();
         visitadosFila.add(inicio);
@@ -70,16 +80,16 @@ public class GrafoListaSocial {
             for (Amizade a : (((Pessoa) atual).getAmizades())) {
                 Pessoa visinho = a.getDestino();
 
-                if (!verticesVisitados.contains(visinho)) {
-                    verticesVisitados.add(visinho);
+                if (!pessoasVisitados.contains(visinho)) {
+                    pessoasVisitados.add(visinho);
                     visitadosFila.add(visinho);
                 }
             }
         }
     }
-    
+
     public void imprimirAmizades() {
-        for (Pessoa v : vertices) {
+        for (Pessoa v : pessoas) {
             System.out.println("A pessoa " + v.getNome() + " tem essas amizades ");
             if (v.getAmizades().size() > 0) {
                 for (Amizade a : v.getAmizades()) {
