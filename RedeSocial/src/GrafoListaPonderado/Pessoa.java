@@ -5,20 +5,20 @@ import java.util.LinkedList;
 public class Pessoa {
 
     private String nome;
-    private LinkedList<Amizade> arestas;
+    private LinkedList<Amizade> amigos;
 
     public Pessoa(String nome) {
         this.nome = nome;
-        this.arestas = new LinkedList<>();
+        this.amigos = new LinkedList<>();
     }
 
     public void adicionarAmizade(Pessoa destino, Integer peso) {
-        this.arestas.add(new Amizade(this, destino, peso));
+        this.amigos.add(new Amizade(this, destino, peso));
     }
 
     public void removerAmizade(Pessoa destino) {
-        this.arestas.removeIf(
-                aresta -> arestas.getLast().equals(destino)
+        this.amigos.removeIf(
+                aresta -> amigos.getLast().equals(destino)
         );
     }
 
@@ -27,7 +27,7 @@ public class Pessoa {
     }
 
     public LinkedList<Amizade> getAmizades() {
-        return arestas;
+        return amigos;
     }
 
 }
