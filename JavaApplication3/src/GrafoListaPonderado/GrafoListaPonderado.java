@@ -1,14 +1,14 @@
 package GrafoListaPonderado;
 
-import GrafoListaPonderado.Aresta;
-import GrafoListaPonderado.Vertice;
+import GrafoListaPonderado.Amizade;
+import GrafoListaPonderado.Pessoa;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class GrafoListaPonderado {
 
-    private ArrayList<Vertice> vertices;
+    private ArrayList<Pessoa> vertices;
     private boolean ponderado;
     private boolean direcionado;
 
@@ -19,43 +19,43 @@ public class GrafoListaPonderado {
 
     }
 
-    public void adicionarVertice(Vertice vertice) {
+    public void adicionarPessoa(Pessoa vertice) {
         this.vertices.add(vertice);
     }
 
-    public void adicionarAresta(Vertice origem, Vertice destino) {
+    public void adicionarAmizade(Pessoa origem, Pessoa destino) {
 
         Integer peso = null;
 
-        origem.adicionarAresta(destino, peso);
+        origem.adicionarAmizade(destino, peso);
         if (!this.direcionado) {
-            destino.adicionarAresta(origem, peso);
+            destino.adicionarAmizade(origem, peso);
         }
 
     }
 
-    public void adicionarAresta(Vertice origem, Vertice destino, Integer peso) {
+    public void adicionarAmizade(Pessoa origem, Pessoa destino, Integer peso) {
 
-        origem.adicionarAresta(destino, peso);
+        origem.adicionarAmizade(destino, peso);
 
         if (!this.direcionado) {
-            destino.adicionarAresta(origem, peso);
+            destino.adicionarAmizade(origem, peso);
         }
     }
 
-    public void removerVertice(Vertice vertice) {
+    public void removerPessoa(Pessoa vertice) {
 
         this.vertices.remove(vertice);
 
     }
 
-    public ArrayList<Vertice> getVertices() {
+    public ArrayList<Pessoa> getPessoas() {
         return vertices;
     }
 
-    public Vertice getVerticePorNome(String nome) {
+    public Pessoa getPessoaPorNome(String nome) {
 
-        for (Vertice v : this.vertices) {
+        for (Pessoa v : this.vertices) {
             if (v.getNome() == nome) {
                 return v;
             }
@@ -65,20 +65,20 @@ public class GrafoListaPonderado {
 
     }
 
-    public void buscarLarcura(Vertice inicio) {
+    public void buscarLarcura(Pessoa inicio) {
 
-        ArrayList<Vertice> verticesVisitados = new ArrayList<>();
+        ArrayList<Pessoa> verticesVisitados = new ArrayList<>();
 
         verticesVisitados.add(inicio);
 
-        Queue<Vertice> visitadosFila = new LinkedList<>();
+        Queue<Pessoa> visitadosFila = new LinkedList<>();
         visitadosFila.add(inicio);
         while (!visitadosFila.isEmpty()) {
             Object atual = visitadosFila.remove();
-            System.out.println(((Vertice) atual).getNome());
+            System.out.println(((Pessoa) atual).getNome());
 
-            for (Aresta a : (((Vertice) atual).getArestas())) {
-                Vertice visinho = a.getDestino();
+            for (Amizade a : (((Pessoa) atual).getAmizades())) {
+                Pessoa visinho = a.getDestino();
 
                 if (!verticesVisitados.contains(visinho)) {
                     verticesVisitados.add(visinho);
@@ -88,11 +88,11 @@ public class GrafoListaPonderado {
         }
     }
     
-    public void imprimirArestas() {
-        for (Vertice v : vertices) {
+    public void imprimirAmizades() {
+        for (Pessoa v : vertices) {
             System.out.println("O vertice " + v.getNome() + " tem as conexoes: ");
-            if (v.getArestas().size() > 0) {
-                for (Aresta a : v.getArestas()) {
+            if (v.getAmizades().size() > 0) {
+                for (Amizade a : v.getAmizades()) {
                     System.out.print("\t" + a.getDestino().getNome());
                     if (ponderado) {
                         System.out.print("(" + a.getPeso() + ")");

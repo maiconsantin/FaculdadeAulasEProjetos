@@ -3,25 +3,25 @@ package GrafoListaPonderado;
 
 
 
-import GrafoListaPonderado.Vertice;
+import GrafoListaPonderado.Pessoa;
 
-public class Aresta {
+public class Amizade {
 
-    private Vertice origem;
-    private Vertice destino;
+    private Pessoa origem;
+    private Pessoa destino;
     private Integer peso;
 
-    public Aresta(Vertice origem, Vertice destino, Integer peso){
+    public Amizade(Pessoa origem, Pessoa destino, Integer peso){
         this.origem = origem;
         this.destino = destino;
         this.peso = peso;
     }
 
-    public Vertice getOrigem() {
+    public Pessoa getOrigem() {
         return origem;
     }
     
-    public Vertice getDestino() {
+    public Pessoa getDestino() {
         return destino;
     }
     

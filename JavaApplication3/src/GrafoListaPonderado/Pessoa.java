@@ -2,21 +2,21 @@ package GrafoListaPonderado;
 
 import java.util.LinkedList;
 
-public class Vertice {
+public class Pessoa {
 
     private String nome;
-    private LinkedList<Aresta> arestas;
+    private LinkedList<Amizade> arestas;
 
-    public Vertice(String nome) {
+    public Pessoa(String nome) {
         this.nome = nome;
         this.arestas = new LinkedList<>();
     }
 
-    public void adicionarAresta(Vertice destino, Integer peso) {
-        this.arestas.add(new Aresta(this, destino, peso));
+    public void adicionarAmizade(Pessoa destino, Integer peso) {
+        this.arestas.add(new Amizade(this, destino, peso));
     }
 
-    public void removerAresta(Vertice destino) {
+    public void removerAmizade(Pessoa destino) {
         this.arestas.removeIf(
                 aresta -> arestas.getLast().equals(destino)
         );
@@ -26,7 +26,7 @@ public class Vertice {
         return nome;
     }
 
-    public LinkedList<Aresta> getArestas() {
+    public LinkedList<Amizade> getAmizades() {
         return arestas;
     }
 
