@@ -12,7 +12,7 @@ public class GrafoListaPonderadoPrincipal {
 
     public static void main(String[] args) {
 
-        GrafoListaPonderado graf = new GrafoListaPonderado(true, true, false);
+        GrafoListaPonderado graf = new GrafoListaPonderado(true, false);
 
         Vertice a = new Vertice("A");
         Vertice b = new Vertice("B");
@@ -65,9 +65,9 @@ public class GrafoListaPonderadoPrincipal {
         graf.adicionarAresta(l, n, 1);
         graf.adicionarAresta(m, n, 1);
 
+        
         graf.imprimirArestas();
 
-        //g.buscarLarcura(a);
-        graf.imptimeCaminho(a, n);
+        graf.buscarLarcura(a);
     }
 }

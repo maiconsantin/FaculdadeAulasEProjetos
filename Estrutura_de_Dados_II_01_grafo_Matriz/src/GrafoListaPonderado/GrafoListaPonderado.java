@@ -11,12 +11,10 @@ public class GrafoListaPonderado {
     private ArrayList<Vertice> vertices;
     private boolean ponderado;
     private boolean direcionado;
-    private boolean ciclico;
 
-    public GrafoListaPonderado(boolean ponderado, boolean direcionado, boolean ciclico) {
+    public GrafoListaPonderado(boolean ponderado, boolean direcionado) {
         this.ponderado = ponderado;
         this.direcionado = direcionado;
-        this.ciclico = ciclico;
         this.vertices = new ArrayList<>();
 
     }
@@ -89,33 +87,7 @@ public class GrafoListaPonderado {
             }
         }
     }
-
-    public ArrayList<Vertice> recursiveBusca(Vertice inicio, Vertice destino, ArrayList<Vertice> caminho) {
-        if (!ciclico && direcionado) {
-            for (Aresta aresta : inicio.getArestas()) {
-                caminho = recursiveBusca(aresta.getDestino(), destino, caminho);
-                if (caminho.contains(destino)) {
-                    caminho.add(aresta.getDestino());
-                    return caminho;
-                }
-                if (aresta.getDestino().equals(destino)) {
-                    caminho.add(aresta.getDestino());
-                    return caminho;
-                }
-            }
-        }
-        return caminho;
-    }
-
-    public void imptimeCaminho(Vertice inicio, Vertice destino) {
-        ArrayList<Vertice> caminho = new ArrayList<>();
-        caminho = recursiveBusca(inicio, destino, caminho);
-        caminho.add(inicio);
-        for (Vertice vertice : caminho) {
-            System.out.println(vertice.getNome());
-        }
-    }
-
+    
     public void imprimirArestas() {
         for (Vertice v : vertices) {
             System.out.println("O vertice " + v.getNome() + " tem as conexoes: ");
