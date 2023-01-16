@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class GrafoListaPonderado {
+public class GrafoListaSocial {
 
     private ArrayList<Pessoa> vertices;
-    private boolean ponderado;
     private boolean direcionado;
 
-    public GrafoListaPonderado(boolean ponderado, boolean direcionado) {
-        this.ponderado = ponderado;
-        this.direcionado = direcionado;
+    public GrafoListaSocial() {
+        this.direcionado = true;
         this.vertices = new ArrayList<>();
 
     }
@@ -34,14 +32,6 @@ public class GrafoListaPonderado {
 
     }
 
-    public void adicionarAmizade(Pessoa origem, Pessoa destino, Integer peso) {
-
-        origem.adicionarAmizade(destino, peso);
-
-        if (!this.direcionado) {
-            destino.adicionarAmizade(origem, peso);
-        }
-    }
 
     public void removerPessoa(Pessoa vertice) {
 
@@ -90,16 +80,13 @@ public class GrafoListaPonderado {
     
     public void imprimirAmizades() {
         for (Pessoa v : vertices) {
-            System.out.println("O vertice " + v.getNome() + " tem as conexoes: ");
+            System.out.println("A pessoa " + v.getNome() + " tem essas amizades ");
             if (v.getAmizades().size() > 0) {
                 for (Amizade a : v.getAmizades()) {
                     System.out.print("\t" + a.getDestino().getNome());
-                    if (ponderado) {
-                        System.out.print("(" + a.getPeso() + ")");
-                    }
                 }
             } else {
-                System.out.print("Nenhuma conexao");
+                System.out.print("Nao tem nem um amigo");
             }
             System.out.println();
 

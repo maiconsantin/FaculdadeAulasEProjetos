@@ -5,6 +5,8 @@ import java.util.LinkedList;
 public class Pessoa {
 
     private String nome;
+    private String email;
+    
     private LinkedList<Amizade> amigos;
 
     public Pessoa(String nome) {
@@ -13,7 +15,7 @@ public class Pessoa {
     }
 
     public void adicionarAmizade(Pessoa destino, Integer peso) {
-        this.amigos.add(new Amizade(this, destino, peso));
+        this.amigos.add(new Amizade(this, destino));
     }
 
     public void removerAmizade(Pessoa destino) {
@@ -22,12 +24,24 @@ public class Pessoa {
         );
     }
 
+    public LinkedList<Amizade> getAmizades() {
+        return amigos;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    public LinkedList<Amizade> getAmizades() {
-        return amigos;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

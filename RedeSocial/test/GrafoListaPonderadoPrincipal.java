@@ -1,5 +1,5 @@
 
-import GrafoListaPonderado.GrafoListaPonderado;
+import GrafoListaPonderado.GrafoListaSocial;
 import GrafoListaPonderado.Pessoa;
 
 /*
@@ -16,7 +16,7 @@ public class GrafoListaPonderadoPrincipal {
 
     public static void main(String[] args) {
 
-        GrafoListaPonderado graf = new GrafoListaPonderado(true, false);
+        GrafoListaSocial graf = new GrafoListaSocial();
 
         Pessoa a = new Pessoa("A");
         Pessoa b = new Pessoa("B");
@@ -48,26 +48,26 @@ public class GrafoListaPonderadoPrincipal {
         graf.adicionarPessoa(m);
         graf.adicionarPessoa(n);
 
-        graf.adicionarAmizade(a, b, 17);
-        graf.adicionarAmizade(a, c, 10);
-        graf.adicionarAmizade(b, d, 1);
-        graf.adicionarAmizade(b, f, 1);
-        graf.adicionarAmizade(c, b, 5);
-        graf.adicionarAmizade(c, d, 9);
-        graf.adicionarAmizade(c, e, 11);
-        graf.adicionarAmizade(d, e, 6);
-        graf.adicionarAmizade(d, g, 1);
-        graf.adicionarAmizade(e, h, 1);
-        graf.adicionarAmizade(f, i, 1);
-        graf.adicionarAmizade(g, h, 1);
-        graf.adicionarAmizade(h, k, 1);
-        graf.adicionarAmizade(h, m, 1);
-        graf.adicionarAmizade(i, j, 1);
-        graf.adicionarAmizade(j, g, 1);
-        graf.adicionarAmizade(j, l, 1);
-        graf.adicionarAmizade(k, l, 1);
-        graf.adicionarAmizade(l, n, 1);
-        graf.adicionarAmizade(m, n, 1);
+        graf.adicionarAmizade(a, b);
+        graf.adicionarAmizade(a, c);
+        graf.adicionarAmizade(b, d);
+        graf.adicionarAmizade(b, f);
+        graf.adicionarAmizade(c, b);
+        graf.adicionarAmizade(c, d);
+        graf.adicionarAmizade(c, e);
+        graf.adicionarAmizade(d, e);
+        graf.adicionarAmizade(d, g);
+        graf.adicionarAmizade(e, h);
+        graf.adicionarAmizade(f, i);
+        graf.adicionarAmizade(g, h);
+        graf.adicionarAmizade(h, k);
+        graf.adicionarAmizade(h, m);
+        graf.adicionarAmizade(i, j);
+        graf.adicionarAmizade(j, g);
+        graf.adicionarAmizade(j, l);
+        graf.adicionarAmizade(k, l);
+        graf.adicionarAmizade(l, n);
+        graf.adicionarAmizade(m, n);
 
         
         graf.imprimirAmizades();

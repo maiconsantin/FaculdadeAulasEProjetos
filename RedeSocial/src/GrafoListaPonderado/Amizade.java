@@ -9,12 +9,10 @@ public class Amizade {
 
     private Pessoa origem;
     private Pessoa destino;
-    private Integer peso;
 
-    public Amizade(Pessoa origem, Pessoa destino, Integer peso){
+    public Amizade(Pessoa origem, Pessoa destino){
         this.origem = origem;
         this.destino = destino;
-        this.peso = peso;
     }
 
     public Pessoa getOrigem() {
@@ -23,10 +21,6 @@ public class Amizade {
     
     public Pessoa getDestino() {
         return destino;
-    }
-    
-    public Integer getPeso() {
-        return peso;
     }
 }
 
