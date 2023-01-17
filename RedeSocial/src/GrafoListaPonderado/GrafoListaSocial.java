@@ -24,6 +24,7 @@ public class GrafoListaSocial {
 
     public void adicionarPessoa(Pessoa pessoa) {
         pessoa.setId(novoID());
+        pessoa.setAtivo(true);
         this.pessoas.add(pessoa);
     }
 
