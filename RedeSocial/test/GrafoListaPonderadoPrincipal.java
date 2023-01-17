@@ -1,6 +1,6 @@
 
-import GrafoListaPonderado.GrafoListaSocial;
-import GrafoListaPonderado.Pessoa;
+import grafoLista.GrafoListaSocial;
+import grafoLista.Pessoa;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

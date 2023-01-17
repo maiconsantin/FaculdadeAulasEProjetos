@@ -1,7 +1,5 @@
-package GrafoListaPonderado;
+package grafoLista;
 
-import GrafoListaPonderado.Amizade;
-import GrafoListaPonderado.Pessoa;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,7 +8,7 @@ public class GrafoListaSocial {
 
     private ArrayList<Pessoa> pessoas;
     private boolean direcionado;
-    private int ids;
+    private static int ids;
 
     public GrafoListaSocial() {
         this.direcionado = true;
@@ -24,7 +22,6 @@ public class GrafoListaSocial {
 
     public void adicionarPessoa(Pessoa pessoa) {
         pessoa.setId(novoID());
-        pessoa.setAtivo(true);
         this.pessoas.add(pessoa);
     }
 
@@ -64,7 +61,7 @@ public class GrafoListaSocial {
     public Pessoa getPessoaPorNome(String nome) {
 
         for (Pessoa v : this.pessoas) {
-            if (v.getNome() == nome) {
+            if (v.getNome().equals(nome)) {
                 return v;
             }
         }
@@ -75,7 +72,7 @@ public class GrafoListaSocial {
 
     public Pessoa getPessoaPorEmail(String email) {
         for (Pessoa v : this.pessoas) {
-            if (v.getEmail() == email) {
+            if (v.getEmail().equals(email)) {
                 return v;
             }
         }

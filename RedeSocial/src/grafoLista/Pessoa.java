@@ -1,6 +1,5 @@
-package GrafoListaPonderado;
+package grafoLista;
 
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Pessoa {
@@ -8,7 +7,7 @@ public class Pessoa {
     private Integer id;
     private String nome;
     private String email;
-    private Date nascnimento;
+    private String nascnimento;
     private LinkedList<Amizade> amigos;
     private boolean ativo;
 
@@ -16,10 +15,11 @@ public class Pessoa {
         this.amigos = new LinkedList<>();
     }
 
-    public Pessoa(String nome, String email, Date nascnimento) {
+    public Pessoa(String nome, String email, String nascnimento) {
         this.nome = nome;
         this.email = email;
         this.nascnimento = nascnimento;
+        this.ativo = true;
         this.amigos = new LinkedList<>();
     }
 
@@ -61,11 +61,11 @@ public class Pessoa {
         this.email = email;
     }
 
-    public Date getNascnimento() {
+    public String getNascnimento() {
         return nascnimento;
     }
 
-    public void setNascnimento(Date nascnimento) {
+    public void setNascnimento(String nascnimento) {
         this.nascnimento = nascnimento;
     }
 

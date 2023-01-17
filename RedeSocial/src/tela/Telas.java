@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Telas;
+package tela;
 
-import GrafoListaPonderado.GrafoListaSocial;
-import GrafoListaPonderado.Pessoa;
+import grafoLista.GrafoListaSocial;
+import grafoLista.Pessoa;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
@@ -19,23 +19,29 @@ import java.util.logging.Logger;
  */
 public class Telas extends javax.swing.JFrame {
 
-    private GrafoListaSocial ListaSocial;
+    private static GrafoListaSocial listaSocial;
     private Pessoa logada;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Creates new form Telas
      */
     public Telas() {
         initComponents();
-        ListaSocial = new GrafoListaSocial();
+        listaSocial = new GrafoListaSocial();
         logada = new Pessoa();
     }
 
     public void perfilLogado(Pessoa pessoa) {
-        jLabelPerfilNome.setText(pessoa.getNome());
-        jLabelPerfilEmail.setText(pessoa.getEmail());
-        jLabelPerfilNascimento.setText(jLabelPerfilNascimento.getText() + dateFormat.format(pessoa.getNascnimento()));
+        logada = pessoa;
+        if (logada.equals(null)) {
+            jLabelPerfilNome.setText("");
+            jLabelPerfilEmail.setText("");
+            jLabelPerfilNascimento.setText(jLabelPerfilNascimento.getText() + "");
+        } else {
+            jLabelPerfilNome.setText(pessoa.getNome());
+            jLabelPerfilEmail.setText(pessoa.getEmail());
+            jLabelPerfilNascimento.setText(jLabelPerfilNascimento.getText() + pessoa.getNascnimento());
+        }
     }
 
     public void mostraCard(String cardName) {
@@ -84,6 +90,7 @@ public class Telas extends javax.swing.JFrame {
         jListPerfilAmigos = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jButtonLogaut = new javax.swing.JButton();
+        jButtonNovosAmigos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,7 +195,7 @@ public class Telas extends javax.swing.JFrame {
         jLabel18.setText("Data de Nascimento:");
 
         jFormattedTextFieldDataNasc.setColumns(5);
-        jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-y"))));
 
         jTextFieldCadastroNome.setColumns(20);
 
@@ -304,12 +311,17 @@ public class Telas extends javax.swing.JFrame {
         );
 
         jLabelPerfilNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilNome.setText("Fulano");
 
         jLabelPerfilEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilEmail.setText("Email@email.com");
+        jLabelPerfilEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabelPerfilEmail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabelPerfilNascimento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilNascimento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilNascimento.setText("Nascido em: ");
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
@@ -327,40 +339,37 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
+        jButtonNovosAmigos.setText("Novos Amigos");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(224, 224, 224)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonLogaut))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(203, 203, 203)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(228, 228, 228)
-                                .addComponent(jLabelPerfilNome)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(203, 203, 203)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(188, 188, 188)))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPerfilEmail)
-                    .addComponent(jLabel5))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabelPerfilNascimento)
-                .addGap(195, 195, 195))
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelPerfilEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelPerfilNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelPerfilNascimento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonNovosAmigos)
+                .addGap(53, 53, 53))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,17 +381,24 @@ public class Telas extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPerfilNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelPerfilEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPerfilNascimento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabelPerfilNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelPerfilEmail)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelPerfilNascimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonNovosAmigos)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jLabelPerfilEmail.getAccessibleContext().setAccessibleDescription("Email@email.com");
 
         javax.swing.GroupLayout PerfilLayout = new javax.swing.GroupLayout(Perfil);
         Perfil.setLayout(PerfilLayout);
@@ -426,34 +442,23 @@ public class Telas extends javax.swing.JFrame {
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
 
-        logada = ListaSocial.getPessoaPorEmail(jTextFieldEmail.getText());
-        if (logada != null) {
-            perfilLogado(logada);
-            mostraCard("Perfil");
-        } else {
-            jLabelAvisoLogin.setText("Email nao encontrado");
-        }
+        Pessoa pessoa = listaSocial.getPessoaPorEmail(jTextFieldEmail.getText());
+        perfilLogado(pessoa);
+        mostraCard("Perfil");
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrar3ActionPerformed
-
-        try {
-            Pessoa pessoa = new Pessoa(
-                    jTextFieldCadastroNome.getText(),
-                    jTextFieldCadastroEmail.getText(),
-                    dateFormat.parse(jFormattedTextFieldDataNasc.getText()));
-            ListaSocial.adicionarPessoa(pessoa);
-            System.out.println("Cadastro Realizado");
-        } catch (ParseException ex) {
-            System.out.println("Nao foi possivel cadastrar");
-        }
-
-
+        Pessoa pessoa = new Pessoa(
+                jTextFieldCadastroNome.getText(),
+                jTextFieldCadastroEmail.getText(),
+                jFormattedTextFieldDataNasc.getText());
+        listaSocial.adicionarPessoa(pessoa);
+        listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
     }//GEN-LAST:event_jButtonCadastrar3ActionPerformed
 
     private void jButtonLogautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogautActionPerformed
         logada = null;
-
+        mostraCard("Login");
     }//GEN-LAST:event_jButtonLogautActionPerformed
 
     private void jButtonSairCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairCadastroActionPerformed
@@ -512,6 +517,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadastrar3;
     private javax.swing.JButton jButtonLogaut;
     private javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonNovosAmigos;
     private javax.swing.JButton jButtonSairCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNasc;
     private javax.swing.JLabel jLabel;

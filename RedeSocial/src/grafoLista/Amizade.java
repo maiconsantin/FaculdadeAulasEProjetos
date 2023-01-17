@@ -1,9 +1,5 @@
-package GrafoListaPonderado;
+package grafoLista;
 
-
-
-
-import GrafoListaPonderado.Pessoa;
 
 public class Amizade {
 
