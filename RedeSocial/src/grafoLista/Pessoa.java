@@ -20,7 +20,7 @@ public class Pessoa {
         this.email = email;
         this.nascnimento = nascnimento;
         this.ativo = true;
-        this.amigos = new LinkedList<>();
+        this.amigos = new LinkedList<Amizade>();
     }
 
     public void adicionarAmizade(Pessoa destino, Integer peso) {

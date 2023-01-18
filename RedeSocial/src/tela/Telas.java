@@ -4,6 +4,7 @@
  */
 package tela;
 
+import grafoLista.Amizade;
 import grafoLista.GrafoListaSocial;
 import grafoLista.Pessoa;
 import java.awt.CardLayout;
@@ -12,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,7 +33,7 @@ public class Telas extends javax.swing.JFrame {
         logada = new Pessoa();
     }
 
-    public void perfilLogado(Pessoa pessoa) {
+    private void perfilLogado(Pessoa pessoa) {
         logada = pessoa;
         if (logada.equals(null)) {
             jLabelPerfilNome.setText("");
@@ -44,9 +46,26 @@ public class Telas extends javax.swing.JFrame {
         }
     }
 
-    public void mostraCard(String cardName) {
-        CardLayout card = (CardLayout) Tela.getLayout();
-        card.show(Tela, cardName);
+    private void mostraCard(String cardName) {
+        CardLayout card = (CardLayout) jTetaPrincipal.getLayout();
+        card.show(jTetaPrincipal, cardName);
+    }
+
+    private void limpaCadastro() {
+        jTextFieldCadastroNome.setText("");
+        jTextFieldCadastroEmail.setText("");
+        jFormattedTextFieldDataNasc.setText("00-00-00");
+    }
+
+    private void atualizaAmigos() {
+
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableAmigos.getModel();
+        modeloTabela.setNumRows(0);
+        for (Amizade amizade : logada.getAmizades()) {
+            modeloTabela.addRow(new Object[]{
+                amizade.getDestino().getNome()
+            });
+        }
     }
 
     /**
@@ -58,17 +77,17 @@ public class Telas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Tela = new javax.swing.JPanel();
-        Login = new javax.swing.JPanel();
+        jTetaPrincipal = new javax.swing.JPanel();
+        jTelaLogin = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jTextFieldEmail = new javax.swing.JTextField();
+        jTextFieldLoginEmail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonCadastro = new javax.swing.JButton();
         jButtonLogin = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelAvisoLogin = new javax.swing.JLabel();
-        Cadastro = new javax.swing.JPanel();
+        jTelaCadastro = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jFormattedTextFieldDataNasc = new javax.swing.JFormattedTextField();
@@ -79,7 +98,7 @@ public class Telas extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel = new javax.swing.JLabel();
         jButtonSairCadastro = new javax.swing.JButton();
-        Perfil = new javax.swing.JPanel();
+        jTelaPerfil = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabelPerfilNome = new javax.swing.JLabel();
@@ -87,25 +106,44 @@ public class Telas extends javax.swing.JFrame {
         jLabelPerfilNascimento = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButtonLogaut = new javax.swing.JButton();
+        jButtonAmigos = new javax.swing.JButton();
+        jTelaAmigos = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonMeuPerfil = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jButtonNovosAmigos = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableAmigos = new javax.swing.JTable();
+        jTelaNovosAmigos = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jButtonMeuPerfil1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonNovosAmigos1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableAmigos1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Tela.setLayout(new java.awt.CardLayout());
+        jTetaPrincipal.setLayout(new java.awt.CardLayout());
 
-        jTextFieldEmail.setColumns(5);
-        jTextFieldEmail.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextFieldLoginEmail.setColumns(5);
+        jTextFieldLoginEmail.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jPanel1.add(jTextFieldLoginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 49, 263, -1));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 204, 255));
         jLabel2.setText("Email:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 52, -1, -1));
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCadastro.setText("Cadastrar");
+        jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCadastroActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 90, -1));
 
         jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonLogin.setText("Login");
@@ -114,78 +152,38 @@ public class Telas extends javax.swing.JFrame {
                 jButtonLoginActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 90, -1));
 
-        jLabel3.setText("ou");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("OU");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, 24));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
         jLabel1.setText("Login");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 6, -1, -1));
 
+        jLabelAvisoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAvisoLogin.setText("       ");
+        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 84, 263, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(168, 168, 168))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelAvisoLogin)
-                    .addComponent(jButton1)
-                    .addComponent(jButtonLogin)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout jTelaLoginLayout = new javax.swing.GroupLayout(jTelaLogin);
+        jTelaLogin.setLayout(jTelaLoginLayout);
+        jTelaLoginLayout.setHorizontalGroup(
+            jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaLoginLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jTelaLoginLayout.setVerticalGroup(
+            jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelAvisoLogin)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
-        Login.setLayout(LoginLayout);
-        LoginLayout.setHorizontalGroup(
-            LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        LoginLayout.setVerticalGroup(
-            LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        Tela.add(Login, "Login");
+        jTetaPrincipal.add(jTelaLogin, "jTelaLogin");
 
         jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 204, 255));
@@ -277,22 +275,24 @@ public class Telas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout CadastroLayout = new javax.swing.GroupLayout(Cadastro);
-        Cadastro.setLayout(CadastroLayout);
-        CadastroLayout.setHorizontalGroup(
-            CadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CadastroLayout.createSequentialGroup()
+        javax.swing.GroupLayout jTelaCadastroLayout = new javax.swing.GroupLayout(jTelaCadastro);
+        jTelaCadastro.setLayout(jTelaCadastroLayout);
+        jTelaCadastroLayout.setHorizontalGroup(
+            jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaCadastroLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        CadastroLayout.setVerticalGroup(
-            CadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CadastroLayout.createSequentialGroup()
+        jTelaCadastroLayout.setVerticalGroup(
+            jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaCadastroLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        Tela.add(Cadastro, "Cadastro");
+        jTetaPrincipal.add(jTelaCadastro, "jTelaCadastro");
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -300,30 +300,37 @@ public class Telas extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 109, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
         );
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 120, 110));
 
         jLabelPerfilNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelPerfilNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilNome.setText("Fulano");
+        jPanel4.add(jLabelPerfilNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 178, 530, -1));
 
         jLabelPerfilEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelPerfilEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilEmail.setText("Email@email.com");
         jLabelPerfilEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelPerfilEmail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel4.add(jLabelPerfilEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 215, 530, -1));
+        jLabelPerfilEmail.getAccessibleContext().setAccessibleDescription("Email@email.com");
 
         jLabelPerfilNascimento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelPerfilNascimento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPerfilNascimento.setText("Nascido em: ");
+        jLabelPerfilNascimento.setText("Nascido em:");
+        jPanel4.add(jLabelPerfilNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 530, -1));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 255, 255));
         jLabel6.setText("Perfil");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jButtonLogaut.setText("Logaut");
         jButtonLogaut.addActionListener(new java.awt.event.ActionListener() {
@@ -331,74 +338,178 @@ public class Telas extends javax.swing.JFrame {
                 jButtonLogautActionPerformed(evt);
             }
         });
+        jPanel4.add(jButtonLogaut, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, -1, -1));
+
+        jButtonAmigos.setText("Amigos");
+        jButtonAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAmigosActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 100, -1));
+
+        javax.swing.GroupLayout jTelaPerfilLayout = new javax.swing.GroupLayout(jTelaPerfil);
+        jTelaPerfil.setLayout(jTelaPerfilLayout);
+        jTelaPerfilLayout.setHorizontalGroup(
+            jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaPerfilLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jTelaPerfilLayout.setVerticalGroup(
+            jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaPerfilLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTetaPrincipal.add(jTelaPerfil, "jTelaPerfil");
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonMeuPerfil.setText("Meu Perfil");
+        jButtonMeuPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMeuPerfilActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonMeuPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, -1));
+
+        jLabel5.setText("Seus Amigos");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
         jButtonNovosAmigos.setText("Novos Amigos");
+        jButtonNovosAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovosAmigosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonNovosAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonLogaut))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Amigos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAmigosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTableAmigos);
+        if (jTableAmigos.getColumnModel().getColumnCount() > 0) {
+            jTableAmigos.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        javax.swing.GroupLayout jTelaAmigosLayout = new javax.swing.GroupLayout(jTelaAmigos);
+        jTelaAmigos.setLayout(jTelaAmigosLayout);
+        jTelaAmigosLayout.setHorizontalGroup(
+            jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaAmigosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPerfilEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelPerfilNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelPerfilNascimento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jButtonNovosAmigos)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jButtonLogaut))
-                .addGap(33, 33, 33)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPerfilNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelPerfilEmail)
-                .addGap(12, 12, 12)
-                .addComponent(jLabelPerfilNascimento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonNovosAmigos)
-                .addContainerGap(130, Short.MAX_VALUE))
-        );
-
-        jLabelPerfilEmail.getAccessibleContext().setAccessibleDescription("Email@email.com");
-
-        javax.swing.GroupLayout PerfilLayout = new javax.swing.GroupLayout(Perfil);
-        Perfil.setLayout(PerfilLayout);
-        PerfilLayout.setHorizontalGroup(
-            PerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PerfilLayout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        PerfilLayout.setVerticalGroup(
-            PerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PerfilLayout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jTelaAmigosLayout.setVerticalGroup(
+            jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaAmigosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        Tela.add(Perfil, "Perfil");
+        jTetaPrincipal.add(jTelaAmigos, "jTelaAmigos");
+
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonMeuPerfil1.setText("Meu Perfil");
+        jButtonMeuPerfil1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMeuPerfil1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButtonMeuPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, 20));
+
+        jLabel7.setText("Seus Amigos");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
+
+        jButtonNovosAmigos1.setText("Novos Amigos");
+        jButtonNovosAmigos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovosAmigos1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButtonNovosAmigos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
+
+        jTableAmigos1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Amigos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableAmigos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAmigos1MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableAmigos1);
+        if (jTableAmigos1.getColumnModel().getColumnCount() > 0) {
+            jTableAmigos1.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        javax.swing.GroupLayout jTelaNovosAmigosLayout = new javax.swing.GroupLayout(jTelaNovosAmigos);
+        jTelaNovosAmigos.setLayout(jTelaNovosAmigosLayout);
+        jTelaNovosAmigosLayout.setHorizontalGroup(
+            jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 246, Short.MAX_VALUE)
+            .addGroup(jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jTelaNovosAmigosLayout.createSequentialGroup()
+                    .addContainerGap(39, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(50, Short.MAX_VALUE)))
+        );
+        jTelaNovosAmigosLayout.setVerticalGroup(
+            jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 316, Short.MAX_VALUE)
+            .addGroup(jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jTelaNovosAmigosLayout.createSequentialGroup()
+                    .addContainerGap(61, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(52, Short.MAX_VALUE)))
+        );
+
+        jTetaPrincipal.add(jTelaNovosAmigos, "card6");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -406,47 +517,96 @@ public class Telas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Tela, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Tela, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        mostraCard("Cadastro");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
+
+        limpaCadastro();
+        mostraCard(jTelaCadastro.getName());
+        jLabelAvisoLogin.setText("");
+
+    }//GEN-LAST:event_jButtonCadastroActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-
-        Pessoa pessoa = listaSocial.getPessoaPorEmail(jTextFieldEmail.getText());
-        perfilLogado(pessoa);
-        mostraCard("Perfil");
+        try {
+            Pessoa pessoa = listaSocial.getPessoaPorEmail(jTextFieldLoginEmail.getText());
+            perfilLogado(pessoa);
+            mostraCard(jTelaPerfil.getName());
+            atualizaAmigos();
+        } catch (Exception e) {
+            jLabelAvisoLogin.setText("Email nao encontrado");
+        }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrar3ActionPerformed
+
         Pessoa pessoa = new Pessoa(
                 jTextFieldCadastroNome.getText(),
                 jTextFieldCadastroEmail.getText(),
                 jFormattedTextFieldDataNasc.getText());
         listaSocial.adicionarPessoa(pessoa);
         listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
+        mostraCard(jTelaLogin.getName());
+        jTextFieldLoginEmail.setText(jTextFieldCadastroEmail.getText());
+        limpaCadastro();
+        jLabelAvisoLogin.setText("");
+
     }//GEN-LAST:event_jButtonCadastrar3ActionPerformed
 
     private void jButtonLogautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogautActionPerformed
         logada = null;
-        mostraCard("Login");
+        mostraCard(jTelaLogin.getName());
+        jLabelAvisoLogin.setText("");
+
     }//GEN-LAST:event_jButtonLogautActionPerformed
 
     private void jButtonSairCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairCadastroActionPerformed
-        mostraCard("Login");
+        mostraCard(jTelaLogin.getName());
+        limpaCadastro();
+        jLabelAvisoLogin.setText("");
+
     }//GEN-LAST:event_jButtonSairCadastroActionPerformed
+
+    private void jButtonAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAmigosActionPerformed
+        mostraCard(jTelaAmigos.getName());
+    }//GEN-LAST:event_jButtonAmigosActionPerformed
+
+    private void jTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableAmigosMouseClicked
+
+    private void jButtonMeuPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMeuPerfilActionPerformed
+        mostraCard(jTelaPerfil.getName());
+        atualizaAmigos();
+    }//GEN-LAST:event_jButtonMeuPerfilActionPerformed
+
+    private void jButtonNovosAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovosAmigosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNovosAmigosActionPerformed
+
+    private void jButtonMeuPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMeuPerfil1ActionPerformed
+        mostraCard(jTelaPerfil.getName());
+        atualizaAmigos();
+    }//GEN-LAST:event_jButtonMeuPerfil1ActionPerformed
+
+    private void jButtonNovosAmigos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovosAmigos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonNovosAmigos1ActionPerformed
+
+    private void jTableAmigos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigos1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableAmigos1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -492,15 +652,15 @@ public class Telas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Cadastro;
-    private javax.swing.JPanel Login;
-    private javax.swing.JPanel Perfil;
-    private javax.swing.JPanel Tela;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAmigos;
     private javax.swing.JButton jButtonCadastrar3;
+    private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonLogaut;
     private javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonMeuPerfil;
+    private javax.swing.JButton jButtonMeuPerfil1;
     private javax.swing.JButton jButtonNovosAmigos;
+    private javax.swing.JButton jButtonNovosAmigos1;
     private javax.swing.JButton jButtonSairCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNasc;
     private javax.swing.JLabel jLabel;
@@ -510,17 +670,31 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelAvisoLogin;
     private javax.swing.JLabel jLabelPerfilEmail;
     private javax.swing.JLabel jLabelPerfilNascimento;
     private javax.swing.JLabel jLabelPerfilNome;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableAmigos;
+    private javax.swing.JTable jTableAmigos1;
+    private javax.swing.JPanel jTelaAmigos;
+    private javax.swing.JPanel jTelaCadastro;
+    private javax.swing.JPanel jTelaLogin;
+    private javax.swing.JPanel jTelaNovosAmigos;
+    private javax.swing.JPanel jTelaPerfil;
+    private javax.swing.JPanel jTetaPrincipal;
     private javax.swing.JTextField jTextFieldCadastroEmail;
     private javax.swing.JTextField jTextFieldCadastroNome;
-    private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldLoginEmail;
     // End of variables declaration//GEN-END:variables
 }
