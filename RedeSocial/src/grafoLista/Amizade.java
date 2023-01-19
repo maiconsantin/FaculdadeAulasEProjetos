@@ -3,18 +3,12 @@ package grafoLista;
 
 public class Amizade {
 
-    private Pessoa origem;
     private Pessoa destino;
 
-    public Amizade(Pessoa origem, Pessoa destino){
-        this.origem = origem;
+    public Amizade( Pessoa destino){
         this.destino = destino;
     }
-
-    public Pessoa getOrigem() {
-        return origem;
-    }
-    
+ 
     public Pessoa getDestino() {
         return destino;
     }

@@ -7,11 +7,9 @@ import java.util.Queue;
 public class GrafoListaSocial {
 
     private ArrayList<Pessoa> pessoas;
-    private boolean direcionado;
     private static int ids;
 
     public GrafoListaSocial() {
-        this.direcionado = true;
         this.pessoas = new ArrayList<>();
         ids = 0;
     }
@@ -27,13 +25,13 @@ public class GrafoListaSocial {
 
     public void adicionarAmizade(Pessoa origem, Pessoa destino) {
 
-        Integer peso = null;
 
-        origem.adicionarAmizade(destino, peso);
-        if (!this.direcionado) {
-            destino.adicionarAmizade(origem, peso);
-        }
+        origem.adicionarAmizade(destino);
 
+    }
+    
+    public void atualizaPessoa(Pessoa pessoa){
+        pessoas.set(pessoas.indexOf(pessoa)-1, pessoa);
     }
 
     public void removerPessoa(Pessoa pessoa) {

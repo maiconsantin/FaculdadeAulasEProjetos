@@ -23,8 +23,8 @@ public class Pessoa {
         this.amigos = new LinkedList<Amizade>();
     }
 
-    public void adicionarAmizade(Pessoa destino, Integer peso) {
-        this.amigos.add(new Amizade(this, destino));
+    public void adicionarAmizade(Pessoa destino) {
+        this.amigos.add(new Amizade( destino));
     }
 
     public void removerAmizade(Pessoa destino) {
