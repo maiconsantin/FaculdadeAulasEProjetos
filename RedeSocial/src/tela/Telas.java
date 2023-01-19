@@ -703,8 +703,9 @@ public class Telas extends javax.swing.JFrame {
                     "Adicionar " + pessoa.getNome()
                     + " email" + pessoa.getEmail() + "?");
             if (opc == JOptionPane.YES_OPTION) {
+                Pessoa aux = logada;
                 logada.adicionarAmizade(pessoa);
-                listaSocial.atualizaPessoa(logada);
+                listaSocial.atualizaPessoa(aux, logada);
                 atualizaNovosAMigos();
             }
         } catch (Exception e) {

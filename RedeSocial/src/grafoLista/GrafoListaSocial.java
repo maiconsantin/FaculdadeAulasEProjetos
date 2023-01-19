@@ -25,13 +25,12 @@ public class GrafoListaSocial {
 
     public void adicionarAmizade(Pessoa origem, Pessoa destino) {
 
-
         origem.adicionarAmizade(destino);
 
     }
-    
-    public void atualizaPessoa(Pessoa pessoa){
-        pessoas.set(pessoas.indexOf(pessoa)-1, pessoa);
+
+    public void atualizaPessoa(Pessoa pessoa,Pessoa atualPessoa) {
+        pessoas.set(pessoas.indexOf(pessoa) - 1, atualPessoa);
     }
 
     public void removerPessoa(Pessoa pessoa) {
