@@ -34,7 +34,7 @@ public class Telas extends javax.swing.JFrame {
     public Telas() {
         initComponents();
         listaSocial = new GrafoListaSocial();
-        nAmigos = new ArrayList<>();
+        seguidores = new ArrayList<>();
         logada = new Pessoa();
 
     }
@@ -69,7 +69,7 @@ public class Telas extends javax.swing.JFrame {
     }
 
     private void atualizaSeguidores() {
-        seguidores = new ArrayList<>();
+
         for (Pessoa pessoa : seguidores) {
             for (Amizade amizade : pessoa.getAmizades()) {
                 if (amizade.getDestino().equals(logada)) {
@@ -87,6 +87,7 @@ public class Telas extends javax.swing.JFrame {
     }
 
     private void atualizaNovosAMigos() {
+        nAmigos = new ArrayList<>();
 
         for (Pessoa pessoa : listaSocial.getPessoas()) {
             nAmigos.add(pessoa);
@@ -705,7 +706,7 @@ public class Telas extends javax.swing.JFrame {
     private void jButtonAdicionarAmigos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarAmigos1ActionPerformed
         try {
 
-            Pessoa pessoa = nAmigos.getPessoas().get(jTableNovosAmigos1.getSelectedRow());
+            Pessoa pessoa = nAmigos.get(jTableNovosAmigos1.getSelectedRow());
             int opc = JOptionPane.showConfirmDialog(null,
                     "Adicionar " + pessoa.getNome()
                     + " email" + pessoa.getEmail() + "?");
