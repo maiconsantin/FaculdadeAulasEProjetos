@@ -70,11 +70,11 @@ public class Telas extends javax.swing.JFrame {
 
     private void atualizaSeguidores() {
         seguidores = new ArrayList<>();
-        for (Pessoa pessoa : seguidores) {
-            for (Amizade amizade : pessoa.getAmizades()) {
-                if (amizade.getDestino().equals(logada)) {
-                    seguidores.add(pessoa);
-                }
+
+        for (Pessoa pessoa : listaSocial.getPessoas()) {
+            for(Amizade amizade: pessoa.getAmizades()) {
+                if(amizade.getDestino().equals(logada))
+                seguidores.add(pessoa);
             }
         }
         DefaultTableModel modeloTabela = (DefaultTableModel) jTableSeguidores.getModel();
