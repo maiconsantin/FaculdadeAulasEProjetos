@@ -30,7 +30,7 @@ public class GrafoListaSocial {
     }
 
     public void atualizaPessoa(Pessoa pessoa,Pessoa atualPessoa) {
-        pessoas.set(pessoas.indexOf(pessoa) - 1, atualPessoa);
+        pessoas.set(pessoas.indexOf(pessoa), atualPessoa);
     }
 
     public void removerPessoa(Pessoa pessoa) {

@@ -25,7 +25,7 @@ public class Telas extends javax.swing.JFrame {
 
     private static GrafoListaSocial listaSocial;
     private Pessoa logada;
-    private static GrafoListaSocial nAmigos;
+    private static ArrayList<Pessoa> nAmigos;
     private static ArrayList<Pessoa> seguidores;
 
     /**
@@ -34,7 +34,9 @@ public class Telas extends javax.swing.JFrame {
     public Telas() {
         initComponents();
         listaSocial = new GrafoListaSocial();
+        nAmigos = new ArrayList<>();
         logada = new Pessoa();
+
     }
 
     private void perfilLogado(Pessoa pessoa) {
@@ -86,18 +88,23 @@ public class Telas extends javax.swing.JFrame {
 
     private void atualizaNovosAMigos() {
 
-        nAmigos = listaSocial;
-        nAmigos.removerPessoa(logada);
-        for (Amizade amizade : logada.getAmizades()) {
-            nAmigos.removerPessoa(amizade.getDestino());
+        for (Pessoa pessoa : listaSocial.getPessoas()) {
+            nAmigos.add(pessoa);
         }
-
+        nAmigos.remove(logada);
+        for (Amizade amizade : logada.getAmizades()) {
+            if (nAmigos.contains(amizade.getDestino())) {
+                nAmigos.remove(amizade.getDestino());
+            }
+        }
         DefaultTableModel modeloTabela = (DefaultTableModel) jTableNovosAmigos1.getModel();
         modeloTabela.setNumRows(0);
-        for (Pessoa pessoa : nAmigos.getPessoas()) {
-            modeloTabela.addRow(new Object[]{
-                pessoa.getNome()
-            });
+        for (Pessoa pessoa : nAmigos) {
+            if (pessoa != logada) {
+                modeloTabela.addRow(new Object[]{
+                    pessoa.getNome()
+                });
+            }
         }
     }
 
