@@ -125,7 +125,6 @@ public class Telas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButtonCadastro = new javax.swing.JButton();
         jButtonLogin = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelAvisoLogin = new javax.swing.JLabel();
         jTelaCadastro = new javax.swing.JPanel();
@@ -171,24 +170,31 @@ public class Telas extends javax.swing.JFrame {
 
         jTetaPrincipal.setLayout(new java.awt.CardLayout());
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextFieldLoginEmail.setColumns(5);
         jTextFieldLoginEmail.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jPanel1.add(jTextFieldLoginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 49, 263, -1));
+        jTextFieldLoginEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLoginEmailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldLoginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 263, -1));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 204, 255));
         jLabel2.setText("Email:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 52, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 70, 30));
 
+        jButtonCadastro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCadastro.setText("Cadastrar");
         jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 90, -1));
+        jPanel1.add(jButtonCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 100, -1));
 
         jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonLogin.setText("Login");
@@ -197,53 +203,58 @@ public class Telas extends javax.swing.JFrame {
                 jButtonLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 90, -1));
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("OU");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, 24));
+        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 90, -1));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Login");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 6, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, -1));
 
         jLabelAvisoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAvisoLogin.setText("       ");
-        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 84, 263, -1));
+        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 263, -1));
 
         javax.swing.GroupLayout jTelaLoginLayout = new javax.swing.GroupLayout(jTelaLogin);
         jTelaLogin.setLayout(jTelaLoginLayout);
         jTelaLoginLayout.setHorizontalGroup(
             jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTelaLoginLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jTelaLoginLayout.setVerticalGroup(
             jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTelaLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTetaPrincipal.add(jTelaLogin, "jTelaLogin");
 
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 204, 255));
         jLabel18.setText("Data de Nascimento:");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 151, -1, -1));
 
         jFormattedTextFieldDataNasc.setColumns(5);
         jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-y"))));
+        jPanel3.add(jFormattedTextFieldDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 154, 100, -1));
 
         jTextFieldCadastroNome.setColumns(20);
+        jPanel3.add(jTextFieldCadastroNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 111, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 204, 255));
         jLabel4.setText("Nome:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 108, -1, -1));
 
         jTextFieldCadastroEmail.setColumns(20);
+        jPanel3.add(jTextFieldCadastroEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 197, -1, -1));
 
         jButtonCadastrar3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCadastrar3.setText("Cadastrar");
@@ -252,189 +263,146 @@ public class Telas extends javax.swing.JFrame {
                 jButtonCadastrar3ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButtonCadastrar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 283, -1, -1));
 
-        jLabel16.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 204, 255));
         jLabel16.setText("Cadastrar");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 31, -1, -1));
 
         jLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel.setForeground(new java.awt.Color(51, 204, 255));
         jLabel.setText("Email:");
+        jPanel3.add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 194, -1, -1));
 
+        jButtonSairCadastro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSairCadastro.setText("Sair");
         jButtonSairCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSairCadastroActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldCadastroEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCadastroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jButtonCadastrar3))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel16))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jButtonSairCadastro)))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel16)
-                .addGap(60, 60, 60)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldCadastroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCadastroEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel))
-                .addGap(31, 31, 31)
-                .addComponent(jButtonCadastrar3)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSairCadastro)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel3.add(jButtonSairCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 283, -1, -1));
 
         javax.swing.GroupLayout jTelaCadastroLayout = new javax.swing.GroupLayout(jTelaCadastro);
         jTelaCadastro.setLayout(jTelaCadastroLayout);
         jTelaCadastroLayout.setHorizontalGroup(
             jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaCadastroLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
         );
         jTelaCadastroLayout.setVerticalGroup(
             jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaCadastroLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jTetaPrincipal.add(jTelaCadastro, "jTelaCadastro");
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 140, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGap(0, 90, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 120, 110));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 140, 90));
 
-        jLabelPerfilNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilNome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelPerfilNome.setForeground(new java.awt.Color(51, 255, 255));
         jLabelPerfilNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilNome.setText("Fulano");
-        jPanel4.add(jLabelPerfilNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 320, -1));
+        jPanel4.add(jLabelPerfilNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 320, -1));
 
-        jLabelPerfilEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelPerfilEmail.setForeground(new java.awt.Color(0, 255, 255));
         jLabelPerfilEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilEmail.setText("Email@email.com");
         jLabelPerfilEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabelPerfilEmail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(jLabelPerfilEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 320, -1));
+        jPanel4.add(jLabelPerfilEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 320, -1));
         jLabelPerfilEmail.getAccessibleContext().setAccessibleDescription("Email@email.com");
 
-        jLabelPerfilNascimento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelPerfilNascimento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelPerfilNascimento.setForeground(new java.awt.Color(51, 255, 255));
         jLabelPerfilNascimento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPerfilNascimento.setText("Nascido em:");
-        jPanel4.add(jLabelPerfilNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 320, -1));
+        jPanel4.add(jLabelPerfilNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 250, -1));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 255, 255));
         jLabel6.setText("Perfil");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
-        jButtonLogaut.setText("Logaut");
+        jButtonLogaut.setText("Logout");
         jButtonLogaut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogautActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonLogaut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel4.add(jButtonLogaut, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jButtonAmigos.setText("Voce Segui");
+        jButtonAmigos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAmigos.setText("Voce Segue");
         jButtonAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAmigosActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 100, -1));
+        jPanel4.add(jButtonAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 110, -1));
 
+        Seguidores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Seguidores.setText("Seguidores");
         Seguidores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeguidoresActionPerformed(evt);
             }
         });
-        jPanel4.add(Seguidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
+        jPanel4.add(Seguidores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
 
         javax.swing.GroupLayout jTelaPerfilLayout = new javax.swing.GroupLayout(jTelaPerfil);
         jTelaPerfil.setLayout(jTelaPerfilLayout);
         jTelaPerfilLayout.setHorizontalGroup(
             jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaPerfilLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
         );
         jTelaPerfilLayout.setVerticalGroup(
             jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jTetaPrincipal.add(jTelaPerfil, "jTelaPerfil");
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButtonMeuPerfil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonMeuPerfil.setText("Meu Perfil");
         jButtonMeuPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMeuPerfilActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonMeuPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel2.add(jButtonMeuPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
+        jButtonNovosAmigos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonNovosAmigos.setText("Seguir mais Pessoas");
         jButtonNovosAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNovosAmigosActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonNovosAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 140, -1));
+        jPanel2.add(jButtonNovosAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 170, -1));
 
+        jTableAmigos.setBackground(new java.awt.Color(153, 153, 153));
+        jTableAmigos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -454,6 +422,7 @@ public class Telas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableAmigos.setGridColor(new java.awt.Color(0, 0, 0));
         jTableAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableAmigosMouseClicked(evt);
@@ -464,23 +433,17 @@ public class Telas extends javax.swing.JFrame {
             jTableAmigos.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 450, 420));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 470, 250));
 
         javax.swing.GroupLayout jTelaAmigosLayout = new javax.swing.GroupLayout(jTelaAmigos);
         jTelaAmigos.setLayout(jTelaAmigosLayout);
         jTelaAmigosLayout.setHorizontalGroup(
             jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaAmigosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
         );
         jTelaAmigosLayout.setVerticalGroup(
             jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaAmigosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
         );
 
         jTetaPrincipal.add(jTelaAmigos, "jTelaAmigos");
@@ -553,6 +516,7 @@ public class Telas extends javax.swing.JFrame {
 
         jTetaPrincipal.add(jTelaNovosAmigos, "jTelaNovosAmigos");
 
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonMeuPerfil2.setText("Meu Perfil");
@@ -561,8 +525,10 @@ public class Telas extends javax.swing.JFrame {
                 jButtonMeuPerfil2ActionPerformed(evt);
             }
         });
-        jPanel7.add(jButtonMeuPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 20));
+        jPanel7.add(jButtonMeuPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, 20));
 
+        jTableSeguidores.setBackground(new java.awt.Color(153, 153, 153));
+        jTableSeguidores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTableSeguidores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -592,23 +558,17 @@ public class Telas extends javax.swing.JFrame {
             jTableSeguidores.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 430, 280));
+        jPanel7.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 400, 280));
 
         javax.swing.GroupLayout jTelaSeguidoresLayout = new javax.swing.GroupLayout(jTelaSeguidores);
         jTelaSeguidores.setLayout(jTelaSeguidoresLayout);
         jTelaSeguidoresLayout.setHorizontalGroup(
             jTelaSeguidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaSeguidoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
         );
         jTelaSeguidoresLayout.setVerticalGroup(
             jTelaSeguidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaSeguidoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
         );
 
         jTetaPrincipal.add(jTelaSeguidores, "jTelaSeguidores");
@@ -629,6 +589,7 @@ public class Telas extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
@@ -738,6 +699,10 @@ public class Telas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableSeguidoresMouseClicked
 
+    private void jTextFieldLoginEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldLoginEmailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -800,7 +765,6 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelAvisoLogin;
