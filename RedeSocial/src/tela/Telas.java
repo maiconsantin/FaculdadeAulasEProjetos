@@ -634,7 +634,7 @@ public class Telas extends javax.swing.JFrame {
                     jTextFieldCadastroEmail.getText(),
                     jFormattedTextFieldDataNasc.getText());
             listaSocial.seguirPessoa(pessoa);
-            listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
+          
             mostraCard("jTelaLogin");
             jTextFieldLoginEmail.setText(jTextFieldCadastroEmail.getText());
             limpaCadastro();

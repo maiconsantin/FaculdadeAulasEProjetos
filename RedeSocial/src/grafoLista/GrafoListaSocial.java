@@ -85,42 +85,7 @@ public class GrafoListaSocial {
         return false;
     }
 
-    public void buscarLarcura(Pessoa inicio) {
 
-        ArrayList<Pessoa> pessoasVisitados = new ArrayList<>();
 
-        pessoasVisitados.add(inicio);
-
-        Queue<Pessoa> visitadosFila = new LinkedList<>();
-        visitadosFila.add(inicio);
-        while (!visitadosFila.isEmpty()) {
-            Object atual = visitadosFila.remove();
-            System.out.println(((Pessoa) atual).getNome());
-
-            for (Seguindo a : (((Pessoa) atual).getSeguindo())) {
-                Pessoa visinho = a.getDestino();
-
-                if (!pessoasVisitados.contains(visinho)) {
-                    pessoasVisitados.add(visinho);
-                    visitadosFila.add(visinho);
-                }
-            }
-        }
-    }
-
-    public void imprimirSeguindo() {
-        for (Pessoa v : pessoas) {
-            System.out.println("A pessoa " + v.getNome() + " tem essas Seguindos ");
-            if (v.getSeguindo().size() > 0) {
-                for (Seguindo a : v.getSeguindo()) {
-                    System.out.print("\t" + a.getDestino().getNome());
-                }
-            } else {
-                System.out.print("Nao tem nem um amigo");
-            }
-            System.out.println();
-
-        }
-    }
 
 }
