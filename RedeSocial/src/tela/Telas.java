@@ -72,9 +72,10 @@ public class Telas extends javax.swing.JFrame {
         seguidores = new ArrayList<>();
 
         for (Pessoa pessoa : listaSocial.getPessoas()) {
-            for(Amizade amizade: pessoa.getAmizades()) {
-                if(amizade.getDestino().equals(logada))
-                seguidores.add(pessoa);
+            for (Amizade amizade : pessoa.getAmizades()) {
+                if (amizade.getDestino().equals(logada)) {
+                    seguidores.add(pessoa);
+                }
             }
         }
         DefaultTableModel modeloTabela = (DefaultTableModel) jTableSeguidores.getModel();
@@ -613,17 +614,18 @@ public class Telas extends javax.swing.JFrame {
 
     private void jButtonCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrar3ActionPerformed
 
-        Pessoa pessoa = new Pessoa(
-                jTextFieldCadastroNome.getText(),
-                jTextFieldCadastroEmail.getText(),
-                jFormattedTextFieldDataNasc.getText());
-        listaSocial.adicionarPessoa(pessoa);
-        listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
-        mostraCard("jTelaLogin");
-        jTextFieldLoginEmail.setText(jTextFieldCadastroEmail.getText());
-        limpaCadastro();
-        jLabelAvisoLogin.setText("");
-
+        if (listaSocial.getTemPessoaPorEmail(jTextFieldCadastroEmail.getText())) {
+            Pessoa pessoa = new Pessoa(
+                    jTextFieldCadastroNome.getText(),
+                    jTextFieldCadastroEmail.getText(),
+                    jFormattedTextFieldDataNasc.getText());
+            listaSocial.adicionarPessoa(pessoa);
+            listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
+            mostraCard("jTelaLogin");
+            jTextFieldLoginEmail.setText(jTextFieldCadastroEmail.getText());
+            limpaCadastro();
+            jLabelAvisoLogin.setText("");
+        }
     }//GEN-LAST:event_jButtonCadastrar3ActionPerformed
 
     private void jButtonLogautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogautActionPerformed

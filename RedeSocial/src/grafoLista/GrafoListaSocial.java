@@ -29,7 +29,7 @@ public class GrafoListaSocial {
 
     }
 
-    public void atualizaPessoa(Pessoa pessoa,Pessoa atualPessoa) {
+    public void atualizaPessoa(Pessoa pessoa, Pessoa atualPessoa) {
         pessoas.set(pessoas.indexOf(pessoa), atualPessoa);
     }
 
@@ -75,6 +75,17 @@ public class GrafoListaSocial {
         }
 
         return null;
+
+    }
+
+    public boolean getTemPessoaPorEmail(String email) {
+        for (Pessoa v : this.pessoas) {
+            if (v.getEmail().equals(email)) {
+                return true;
+            }
+        }
+
+        return false;
 
     }
 
