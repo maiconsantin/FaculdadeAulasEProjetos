@@ -8,11 +8,11 @@ public class Pessoa {
     private String nome;
     private String email;
     private String nascnimento;
-    private LinkedList<Amizade> amigos;
+    private LinkedList<Seguindo> seguindo;
     private boolean ativo;
 
     public Pessoa() {
-        this.amigos = new LinkedList<>();
+        this.seguindo = new LinkedList<>();
     }
 
     public Pessoa(String nome, String email, String nascnimento) {
@@ -20,25 +20,29 @@ public class Pessoa {
         this.email = email;
         this.nascnimento = nascnimento;
         this.ativo = true;
-        this.amigos = new LinkedList<Amizade>();
+        this.seguindo = new LinkedList<Seguindo>();
     }
 
-    public void adicionarAmizade(Pessoa destino) {
-        this.amigos.add(new Amizade( destino));
+    public void adicionarSeguindo(Pessoa destino) {
+        this.seguindo.add(new Seguindo(destino));
     }
 
-    public void removerAmizade(Pessoa destino) {
-        this.amigos.removeIf(
-                aresta -> amigos.getLast().equals(destino)
+    public void removerSeguindo(Pessoa pessoa) {
+        this.seguindo.removeIf(
+                seguindo -> seguindo.getDestino().equals(pessoa)
         );
     }
 
-    public LinkedList<Amizade> getAmizades() {
-        return amigos;
+    public LinkedList<Seguindo> getSeguindo() {
+        return seguindo;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void comparaEmail(String email) {
+
     }
 
     public void setId(Integer id) {

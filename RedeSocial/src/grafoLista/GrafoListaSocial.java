@@ -18,15 +18,13 @@ public class GrafoListaSocial {
         return this.ids += 1;
     }
 
-    public void adicionarPessoa(Pessoa pessoa) {
+    public void seguirPessoa(Pessoa pessoa) {
         pessoa.setId(novoID());
         this.pessoas.add(pessoa);
     }
 
-    public void adicionarAmizade(Pessoa origem, Pessoa destino) {
-
-        origem.adicionarAmizade(destino);
-
+    public void adicionarSeguindo(Pessoa origem, Pessoa destino) {
+        origem.adicionarSeguindo(destino);
     }
 
     public void atualizaPessoa(Pessoa pessoa, Pessoa atualPessoa) {
@@ -78,15 +76,13 @@ public class GrafoListaSocial {
 
     }
 
-    public boolean getTemPessoaPorEmail(String email) {
-        for (Pessoa v : this.pessoas) {
-            if (v.getEmail().equals(email)) {
+    public boolean getTemPessoaPorEmail(String e) {
+        for (Pessoa p : this.pessoas) {
+            if (p.getEmail().equals(e)) {
                 return true;
             }
         }
-
         return false;
-
     }
 
     public void buscarLarcura(Pessoa inicio) {
@@ -101,7 +97,7 @@ public class GrafoListaSocial {
             Object atual = visitadosFila.remove();
             System.out.println(((Pessoa) atual).getNome());
 
-            for (Amizade a : (((Pessoa) atual).getAmizades())) {
+            for (Seguindo a : (((Pessoa) atual).getSeguindo())) {
                 Pessoa visinho = a.getDestino();
 
                 if (!pessoasVisitados.contains(visinho)) {
@@ -112,11 +108,11 @@ public class GrafoListaSocial {
         }
     }
 
-    public void imprimirAmizades() {
+    public void imprimirSeguindo() {
         for (Pessoa v : pessoas) {
-            System.out.println("A pessoa " + v.getNome() + " tem essas amizades ");
-            if (v.getAmizades().size() > 0) {
-                for (Amizade a : v.getAmizades()) {
+            System.out.println("A pessoa " + v.getNome() + " tem essas Seguindos ");
+            if (v.getSeguindo().size() > 0) {
+                for (Seguindo a : v.getSeguindo()) {
                     System.out.print("\t" + a.getDestino().getNome());
                 }
             } else {

@@ -1,11 +1,11 @@
 package grafoLista;
 
 
-public class Amizade {
+public class Seguindo {
 
     private Pessoa destino;
 
-    public Amizade( Pessoa destino){
+    public Seguindo( Pessoa destino){
         this.destino = destino;
     }
  

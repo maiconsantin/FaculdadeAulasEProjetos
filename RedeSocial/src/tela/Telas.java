@@ -4,9 +4,9 @@
  */
 package tela;
 
-import grafoLista.Amizade;
 import grafoLista.GrafoListaSocial;
 import grafoLista.Pessoa;
+import grafoLista.Seguindo;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
@@ -25,8 +25,9 @@ public class Telas extends javax.swing.JFrame {
 
     private static GrafoListaSocial listaSocial;
     private Pessoa logada;
-    private static ArrayList<Pessoa> nAmigos;
+    private static ArrayList<Pessoa> nSeguindo;
     private static ArrayList<Pessoa> seguidores;
+    private static ArrayList<Pessoa> seguindo;
 
     /**
      * Creates new form Telas
@@ -57,13 +58,17 @@ public class Telas extends javax.swing.JFrame {
         jFormattedTextFieldDataNasc.setText("00-00-00");
     }
 
-    private void atualizaAmigos() {
-
-        DefaultTableModel modeloTabela = (DefaultTableModel) jTableAmigos.getModel();
+    private void atualizaSeguindo() {
+        seguindo = new ArrayList<>();
+        jButtonPararDeSeguir.setVisible(false);
+        for (Seguindo s : logada.getSeguindo()) {
+            seguindo.add(s.getDestino());
+        }
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableSeguindo.getModel();
         modeloTabela.setNumRows(0);
-        for (Amizade amizade : logada.getAmizades()) {
+        for (Pessoa p : seguindo) {
             modeloTabela.addRow(new Object[]{
-                amizade.getDestino().getNome()
+                p.getNome()
             });
         }
     }
@@ -72,8 +77,8 @@ public class Telas extends javax.swing.JFrame {
         seguidores = new ArrayList<>();
 
         for (Pessoa pessoa : listaSocial.getPessoas()) {
-            for (Amizade amizade : pessoa.getAmizades()) {
-                if (amizade.getDestino().equals(logada)) {
+            for (Seguindo s : pessoa.getSeguindo()) {
+                if (s.getDestino().equals(logada)) {
                     seguidores.add(pessoa);
                 }
             }
@@ -87,21 +92,21 @@ public class Telas extends javax.swing.JFrame {
         }
     }
 
-    private void atualizaNovosAMigos() {
-        nAmigos = new ArrayList<>();
+    private void atualizaNovosSeguindo() {
+        nSeguindo = new ArrayList<>();
 
         for (Pessoa pessoa : listaSocial.getPessoas()) {
-            nAmigos.add(pessoa);
+            nSeguindo.add(pessoa);
         }
-        nAmigos.remove(logada);
-        for (Amizade amizade : logada.getAmizades()) {
-            if (nAmigos.contains(amizade.getDestino())) {
-                nAmigos.remove(amizade.getDestino());
+        nSeguindo.remove(logada);
+        for (Seguindo s : logada.getSeguindo()) {
+            if (nSeguindo.contains(s.getDestino())) {
+                nSeguindo.remove(s.getDestino());
             }
         }
-        DefaultTableModel modeloTabela = (DefaultTableModel) jTableNovosAmigos1.getModel();
+        DefaultTableModel modeloTabela = (DefaultTableModel) jTableNovosSeguindo.getModel();
         modeloTabela.setNumRows(0);
-        for (Pessoa pessoa : nAmigos) {
+        for (Pessoa pessoa : nSeguindo) {
             if (pessoa != logada) {
                 modeloTabela.addRow(new Object[]{
                     pessoa.getNome()
@@ -139,6 +144,7 @@ public class Telas extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel = new javax.swing.JLabel();
         jButtonSairCadastro = new javax.swing.JButton();
+        jLabelCadastroNotifica = new javax.swing.JLabel();
         jTelaPerfil = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -147,20 +153,21 @@ public class Telas extends javax.swing.JFrame {
         jLabelPerfilNascimento = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButtonLogaut = new javax.swing.JButton();
-        jButtonAmigos = new javax.swing.JButton();
+        jButtonSeguindo = new javax.swing.JButton();
         Seguidores = new javax.swing.JButton();
-        jTelaAmigos = new javax.swing.JPanel();
+        jTelaSeguindo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonMeuPerfil = new javax.swing.JButton();
-        jButtonNovosAmigos = new javax.swing.JButton();
+        jButtonSeguirNovos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableAmigos = new javax.swing.JTable();
-        jTelaNovosAmigos = new javax.swing.JPanel();
+        jTableSeguindo = new javax.swing.JTable();
+        jButtonPararDeSeguir = new javax.swing.JButton();
+        jTelaNovosSeguindo = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jButtonMeuPerfil1 = new javax.swing.JButton();
-        jButtonAdicionarAmigos1 = new javax.swing.JButton();
+        jButtonSeguir = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTableNovosAmigos1 = new javax.swing.JTable();
+        jTableNovosSeguindo = new javax.swing.JTable();
         jTelaSeguidores = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jButtonMeuPerfil2 = new javax.swing.JButton();
@@ -168,25 +175,22 @@ public class Telas extends javax.swing.JFrame {
         jTableSeguidores = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jTetaPrincipal.setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextFieldLoginEmail.setColumns(5);
         jTextFieldLoginEmail.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jTextFieldLoginEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLoginEmailActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextFieldLoginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 263, -1));
+        jPanel1.add(jTextFieldLoginEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 263, -1));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 204, 255));
         jLabel2.setText("Email:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 70, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 70, 30));
 
         jButtonCadastro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCadastro.setText("Cadastrar");
@@ -195,7 +199,7 @@ public class Telas extends javax.swing.JFrame {
                 jButtonCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 100, -1));
+        jPanel1.add(jButtonCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 100, -1));
 
         jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonLogin.setText("Login");
@@ -204,58 +208,60 @@ public class Telas extends javax.swing.JFrame {
                 jButtonLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 90, -1));
+        jPanel1.add(jButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 90, -1));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Login");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 90, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, -1));
 
         jLabelAvisoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAvisoLogin.setText("       ");
-        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 263, -1));
+        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 263, -1));
 
         javax.swing.GroupLayout jTelaLoginLayout = new javax.swing.GroupLayout(jTelaLogin);
         jTelaLogin.setLayout(jTelaLoginLayout);
         jTelaLoginLayout.setHorizontalGroup(
             jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTelaLoginLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTelaLoginLayout.setVerticalGroup(
             jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTelaLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTetaPrincipal.add(jTelaLogin, "jTelaLogin");
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 204, 255));
         jLabel18.setText("Data de Nascimento:");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 151, -1, -1));
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jFormattedTextFieldDataNasc.setColumns(5);
         jFormattedTextFieldDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-y"))));
-        jPanel3.add(jFormattedTextFieldDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 154, 100, -1));
+        jPanel3.add(jFormattedTextFieldDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 100, -1));
 
         jTextFieldCadastroNome.setColumns(20);
-        jPanel3.add(jTextFieldCadastroNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 111, -1, -1));
+        jPanel3.add(jTextFieldCadastroNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 204, 255));
         jLabel4.setText("Nome:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 108, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
 
         jTextFieldCadastroEmail.setColumns(20);
-        jPanel3.add(jTextFieldCadastroEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 197, -1, -1));
+        jPanel3.add(jTextFieldCadastroEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
 
         jButtonCadastrar3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCadastrar3.setText("Cadastrar");
@@ -264,17 +270,17 @@ public class Telas extends javax.swing.JFrame {
                 jButtonCadastrar3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonCadastrar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 283, -1, -1));
+        jPanel3.add(jButtonCadastrar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 204, 255));
         jLabel16.setText("Cadastrar");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 31, -1, -1));
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
         jLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel.setForeground(new java.awt.Color(51, 204, 255));
         jLabel.setText("Email:");
-        jPanel3.add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 194, -1, -1));
+        jPanel3.add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         jButtonSairCadastro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonSairCadastro.setText("Sair");
@@ -283,22 +289,32 @@ public class Telas extends javax.swing.JFrame {
                 jButtonSairCadastroActionPerformed(evt);
             }
         });
-        jPanel3.add(jButtonSairCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 283, -1, -1));
+        jPanel3.add(jButtonSairCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+
+        jLabelCadastroNotifica.setText("   ");
+        jPanel3.add(jLabelCadastroNotifica, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
 
         javax.swing.GroupLayout jTelaCadastroLayout = new javax.swing.GroupLayout(jTelaCadastro);
         jTelaCadastro.setLayout(jTelaCadastroLayout);
         jTelaCadastroLayout.setHorizontalGroup(
             jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addGroup(jTelaCadastroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTelaCadastroLayout.setVerticalGroup(
             jTelaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jTelaCadastroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTetaPrincipal.add(jTelaCadastro, "jTelaCadastro");
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(153, 153, 153));
@@ -350,14 +366,14 @@ public class Telas extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonLogaut, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jButtonAmigos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonAmigos.setText("Voce Segue");
-        jButtonAmigos.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeguindo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonSeguindo.setText("Seguindo");
+        jButtonSeguindo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAmigosActionPerformed(evt);
+                jButtonSeguindoActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 110, -1));
+        jPanel4.add(jButtonSeguindo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 110, -1));
 
         Seguidores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Seguidores.setText("Seguidores");
@@ -372,16 +388,23 @@ public class Telas extends javax.swing.JFrame {
         jTelaPerfil.setLayout(jTelaPerfilLayout);
         jTelaPerfilLayout.setHorizontalGroup(
             jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addGroup(jTelaPerfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jTelaPerfilLayout.setVerticalGroup(
             jTelaPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jTelaPerfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTetaPrincipal.add(jTelaPerfil, "jTelaPerfil");
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonMeuPerfil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -391,20 +414,20 @@ public class Telas extends javax.swing.JFrame {
                 jButtonMeuPerfilActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonMeuPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        jPanel2.add(jButtonMeuPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jButtonNovosAmigos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonNovosAmigos.setText("Seguir mais Pessoas");
-        jButtonNovosAmigos.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeguirNovos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonSeguirNovos.setText("Seguir mais Pessoas");
+        jButtonSeguirNovos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovosAmigosActionPerformed(evt);
+                jButtonSeguirNovosActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonNovosAmigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 170, -1));
+        jPanel2.add(jButtonSeguirNovos, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 170, -1));
 
-        jTableAmigos.setBackground(new java.awt.Color(153, 153, 153));
-        jTableAmigos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTableAmigos.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSeguindo.setBackground(new java.awt.Color(153, 153, 153));
+        jTableSeguindo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTableSeguindo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -412,7 +435,7 @@ public class Telas extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Voce Segue"
+                "Seguindo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -423,32 +446,49 @@ public class Telas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableAmigos.setGridColor(new java.awt.Color(0, 0, 0));
-        jTableAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableSeguindo.setGridColor(new java.awt.Color(0, 0, 0));
+        jTableSeguindo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableAmigosMouseClicked(evt);
+                jTableSeguindoMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTableAmigos);
-        if (jTableAmigos.getColumnModel().getColumnCount() > 0) {
-            jTableAmigos.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane2.setViewportView(jTableSeguindo);
+        if (jTableSeguindo.getColumnModel().getColumnCount() > 0) {
+            jTableSeguindo.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 470, 250));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 430, 230));
 
-        javax.swing.GroupLayout jTelaAmigosLayout = new javax.swing.GroupLayout(jTelaAmigos);
-        jTelaAmigos.setLayout(jTelaAmigosLayout);
-        jTelaAmigosLayout.setHorizontalGroup(
-            jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+        jButtonPararDeSeguir.setText("Parar de Seguir");
+        jButtonPararDeSeguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPararDeSeguirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonPararDeSeguir, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+
+        javax.swing.GroupLayout jTelaSeguindoLayout = new javax.swing.GroupLayout(jTelaSeguindo);
+        jTelaSeguindo.setLayout(jTelaSeguindoLayout);
+        jTelaSeguindoLayout.setHorizontalGroup(
+            jTelaSeguindoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaSeguindoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jTelaAmigosLayout.setVerticalGroup(
-            jTelaAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+        jTelaSeguindoLayout.setVerticalGroup(
+            jTelaSeguindoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaSeguindoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTetaPrincipal.add(jTelaAmigos, "jTelaAmigos");
+        jTetaPrincipal.add(jTelaSeguindo, "jTelaSeguindo");
 
+        jTelaNovosSeguindo.setPreferredSize(new java.awt.Dimension(500, 500));
+
+        jPanel6.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonMeuPerfil1.setText("Meu Perfil");
@@ -457,17 +497,17 @@ public class Telas extends javax.swing.JFrame {
                 jButtonMeuPerfil1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButtonMeuPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 20));
+        jPanel6.add(jButtonMeuPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
-        jButtonAdicionarAmigos1.setText("Seguir");
-        jButtonAdicionarAmigos1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeguir.setText("Seguir");
+        jButtonSeguir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdicionarAmigos1ActionPerformed(evt);
+                jButtonSeguirActionPerformed(evt);
             }
         });
-        jPanel6.add(jButtonAdicionarAmigos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 70, -1));
+        jPanel6.add(jButtonSeguir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 70, -1));
 
-        jTableNovosAmigos1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableNovosSeguindo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -486,38 +526,42 @@ public class Telas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableNovosAmigos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableNovosSeguindo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableNovosAmigos1MouseClicked(evt);
+                jTableNovosSeguindoMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jTableNovosAmigos1);
-        if (jTableNovosAmigos1.getColumnModel().getColumnCount() > 0) {
-            jTableNovosAmigos1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane3.setViewportView(jTableNovosSeguindo);
+        if (jTableNovosSeguindo.getColumnModel().getColumnCount() > 0) {
+            jTableNovosSeguindo.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 430, 280));
+        jPanel6.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 430, 280));
 
-        javax.swing.GroupLayout jTelaNovosAmigosLayout = new javax.swing.GroupLayout(jTelaNovosAmigos);
-        jTelaNovosAmigos.setLayout(jTelaNovosAmigosLayout);
-        jTelaNovosAmigosLayout.setHorizontalGroup(
-            jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaNovosAmigosLayout.createSequentialGroup()
+        javax.swing.GroupLayout jTelaNovosSeguindoLayout = new javax.swing.GroupLayout(jTelaNovosSeguindo);
+        jTelaNovosSeguindo.setLayout(jTelaNovosSeguindoLayout);
+        jTelaNovosSeguindoLayout.setHorizontalGroup(
+            jTelaNovosSeguindoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaNovosSeguindoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jTelaNovosAmigosLayout.setVerticalGroup(
-            jTelaNovosAmigosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jTelaNovosAmigosLayout.createSequentialGroup()
+        jTelaNovosSeguindoLayout.setVerticalGroup(
+            jTelaNovosSeguindoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jTelaNovosSeguindoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTetaPrincipal.add(jTelaNovosAmigos, "jTelaNovosAmigos");
+        jTetaPrincipal.add(jTelaNovosSeguindo, "jTelaNovosSeguindo");
+
+        jTelaSeguidores.setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel7.setMaximumSize(new java.awt.Dimension(500, 2147483647));
+        jPanel7.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonMeuPerfil2.setText("Meu Perfil");
@@ -549,11 +593,6 @@ public class Telas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableSeguidores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableSeguidoresMouseClicked(evt);
-            }
-        });
         jScrollPane4.setViewportView(jTableSeguidores);
         if (jTableSeguidores.getColumnModel().getColumnCount() > 0) {
             jTableSeguidores.getColumnModel().getColumn(0).setResizable(false);
@@ -565,11 +604,17 @@ public class Telas extends javax.swing.JFrame {
         jTelaSeguidores.setLayout(jTelaSeguidoresLayout);
         jTelaSeguidoresLayout.setHorizontalGroup(
             jTelaSeguidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+            .addGroup(jTelaSeguidoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jTelaSeguidoresLayout.setVerticalGroup(
             jTelaSeguidoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+            .addGroup(jTelaSeguidoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTetaPrincipal.add(jTelaSeguidores, "jTelaSeguidores");
@@ -580,13 +625,13 @@ public class Telas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
+                .addComponent(jTetaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
         );
 
         pack();
@@ -605,7 +650,7 @@ public class Telas extends javax.swing.JFrame {
         try {
             Pessoa pessoa = listaSocial.getPessoaPorEmail(jTextFieldLoginEmail.getText());
             perfilLogado(pessoa);
-            atualizaAmigos();
+            atualizaSeguindo();
             mostraCard("jTelaPerfil");
         } catch (Exception e) {
             jLabelAvisoLogin.setText("Email nao encontrado");
@@ -614,17 +659,19 @@ public class Telas extends javax.swing.JFrame {
 
     private void jButtonCadastrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrar3ActionPerformed
 
-        if (listaSocial.getTemPessoaPorEmail(jTextFieldCadastroEmail.getText())) {
+        if (!listaSocial.getTemPessoaPorEmail(jTextFieldCadastroEmail.getText())) {
             Pessoa pessoa = new Pessoa(
                     jTextFieldCadastroNome.getText(),
                     jTextFieldCadastroEmail.getText(),
                     jFormattedTextFieldDataNasc.getText());
-            listaSocial.adicionarPessoa(pessoa);
+            listaSocial.seguirPessoa(pessoa);
             listaSocial.getPessoaPorNome(jTextFieldCadastroNome.getText());
             mostraCard("jTelaLogin");
             jTextFieldLoginEmail.setText(jTextFieldCadastroEmail.getText());
             limpaCadastro();
             jLabelAvisoLogin.setText("");
+        } else {
+            jLabelCadastroNotifica.setText("Email ja Cadastrado");
         }
     }//GEN-LAST:event_jButtonCadastrar3ActionPerformed
 
@@ -641,51 +688,51 @@ public class Telas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonSairCadastroActionPerformed
 
-    private void jButtonAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAmigosActionPerformed
-        atualizaAmigos();
-        mostraCard("jTelaAmigos");
-    }//GEN-LAST:event_jButtonAmigosActionPerformed
+    private void jButtonSeguindoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeguindoActionPerformed
+        atualizaSeguindo();
+        mostraCard("jTelaSeguindo");
+    }//GEN-LAST:event_jButtonSeguindoActionPerformed
 
-    private void jTableAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAmigosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTableAmigosMouseClicked
+    private void jTableSeguindoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSeguindoMouseClicked
+        jButtonPararDeSeguir.setVisible(true);
+    }//GEN-LAST:event_jTableSeguindoMouseClicked
 
     private void jButtonMeuPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMeuPerfilActionPerformed
         mostraCard("jTelaPerfil");
-        atualizaAmigos();
+        atualizaSeguindo();
     }//GEN-LAST:event_jButtonMeuPerfilActionPerformed
 
-    private void jButtonNovosAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovosAmigosActionPerformed
-        mostraCard("jTelaNovosAmigos");
-        atualizaNovosAMigos();
-        jButtonAdicionarAmigos1.setVisible(false);
-    }//GEN-LAST:event_jButtonNovosAmigosActionPerformed
+    private void jButtonSeguirNovosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeguirNovosActionPerformed
+        mostraCard("jTelaNovosSeguindo");
+        atualizaNovosSeguindo();
+        jButtonSeguir.setVisible(false);
+    }//GEN-LAST:event_jButtonSeguirNovosActionPerformed
 
     private void jButtonMeuPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMeuPerfil1ActionPerformed
         mostraCard("jTelaPerfil");
-        atualizaAmigos();
+        atualizaSeguindo();
     }//GEN-LAST:event_jButtonMeuPerfil1ActionPerformed
 
-    private void jButtonAdicionarAmigos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarAmigos1ActionPerformed
+    private void jButtonSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeguirActionPerformed
         try {
 
-            Pessoa pessoa = nAmigos.get(jTableNovosAmigos1.getSelectedRow());
+            Pessoa pessoa = nSeguindo.get(jTableNovosSeguindo.getSelectedRow());
             int opc = JOptionPane.showConfirmDialog(null,
                     "Adicionar " + pessoa.getNome()
                     + " email" + pessoa.getEmail() + "?");
             if (opc == JOptionPane.YES_OPTION) {
                 Pessoa aux = logada;
-                logada.adicionarAmizade(pessoa);
+                logada.adicionarSeguindo(pessoa);
                 listaSocial.atualizaPessoa(aux, logada);
-                atualizaNovosAMigos();
+                atualizaNovosSeguindo();
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButtonAdicionarAmigos1ActionPerformed
+    }//GEN-LAST:event_jButtonSeguirActionPerformed
 
-    private void jTableNovosAmigos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNovosAmigos1MouseClicked
-        jButtonAdicionarAmigos1.setVisible(true);
-    }//GEN-LAST:event_jTableNovosAmigos1MouseClicked
+    private void jTableNovosSeguindoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNovosSeguindoMouseClicked
+        jButtonSeguir.setVisible(true);
+    }//GEN-LAST:event_jTableNovosSeguindoMouseClicked
 
     private void SeguidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguidoresActionPerformed
         mostraCard("jTelaSeguidores");
@@ -694,16 +741,26 @@ public class Telas extends javax.swing.JFrame {
 
     private void jButtonMeuPerfil2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMeuPerfil2ActionPerformed
         mostraCard("jTelaPerfil");
-        atualizaAmigos();
+        atualizaSeguindo();
     }//GEN-LAST:event_jButtonMeuPerfil2ActionPerformed
 
-    private void jTableSeguidoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSeguidoresMouseClicked
+    private void jButtonPararDeSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPararDeSeguirActionPerformed
+        try {
 
-    }//GEN-LAST:event_jTableSeguidoresMouseClicked
+            Pessoa pessoa = seguindo.get(jTableSeguindo.getSelectedRow());
+            int opc = JOptionPane.showConfirmDialog(null,
+                    "Parar de Seguir: " + pessoa.getNome()
+                    + " email :" + pessoa.getEmail() + "?");
+            if (opc == JOptionPane.YES_OPTION) {
+                Pessoa aux = logada;
+                logada.removerSeguindo(pessoa);
+                listaSocial.atualizaPessoa(aux, logada);
+                atualizaSeguindo();
+            }
+        } catch (Exception e) {
 
-    private void jTextFieldLoginEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLoginEmailActionPerformed
+        }
+    }//GEN-LAST:event_jButtonPararDeSeguirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -750,8 +807,6 @@ public class Telas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Seguidores;
-    private javax.swing.JButton jButtonAdicionarAmigos1;
-    private javax.swing.JButton jButtonAmigos;
     private javax.swing.JButton jButtonCadastrar3;
     private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonLogaut;
@@ -759,8 +814,11 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMeuPerfil;
     private javax.swing.JButton jButtonMeuPerfil1;
     private javax.swing.JButton jButtonMeuPerfil2;
-    private javax.swing.JButton jButtonNovosAmigos;
+    private javax.swing.JButton jButtonPararDeSeguir;
     private javax.swing.JButton jButtonSairCadastro;
+    private javax.swing.JButton jButtonSeguindo;
+    private javax.swing.JButton jButtonSeguir;
+    private javax.swing.JButton jButtonSeguirNovos;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataNasc;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
@@ -770,6 +828,7 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelAvisoLogin;
+    private javax.swing.JLabel jLabelCadastroNotifica;
     private javax.swing.JLabel jLabelPerfilEmail;
     private javax.swing.JLabel jLabelPerfilNascimento;
     private javax.swing.JLabel jLabelPerfilNome;
@@ -783,15 +842,15 @@ public class Telas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTableAmigos;
-    private javax.swing.JTable jTableNovosAmigos1;
+    private javax.swing.JTable jTableNovosSeguindo;
     private javax.swing.JTable jTableSeguidores;
-    private javax.swing.JPanel jTelaAmigos;
+    private javax.swing.JTable jTableSeguindo;
     private javax.swing.JPanel jTelaCadastro;
     private javax.swing.JPanel jTelaLogin;
-    private javax.swing.JPanel jTelaNovosAmigos;
+    private javax.swing.JPanel jTelaNovosSeguindo;
     private javax.swing.JPanel jTelaPerfil;
     private javax.swing.JPanel jTelaSeguidores;
+    private javax.swing.JPanel jTelaSeguindo;
     private javax.swing.JPanel jTetaPrincipal;
     private javax.swing.JTextField jTextFieldCadastroEmail;
     private javax.swing.JTextField jTextFieldCadastroNome;
