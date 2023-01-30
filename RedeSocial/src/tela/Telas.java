@@ -177,7 +177,7 @@ public class Telas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jTetaPrincipal.setLayout(new java.awt.CardLayout(1, 0));
+        jTetaPrincipal.setLayout(new java.awt.CardLayout());
 
         jTelaLogin.setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -220,7 +220,7 @@ public class Telas extends javax.swing.JFrame {
 
         jLabelAvisoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelAvisoLogin.setText("       ");
-        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 263, -1));
+        jPanel1.add(jLabelAvisoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 263, -1));
 
         javax.swing.GroupLayout jTelaLoginLayout = new javax.swing.GroupLayout(jTelaLogin);
         jTelaLogin.setLayout(jTelaLoginLayout);
@@ -230,7 +230,7 @@ public class Telas extends javax.swing.JFrame {
         );
         jTelaLoginLayout.setVerticalGroup(
             jTelaLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTetaPrincipal.add(jTelaLogin, "jTelaLogin");
@@ -531,7 +531,7 @@ public class Telas extends javax.swing.JFrame {
             jTelaNovosSeguindoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTelaNovosSeguindoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jTelaNovosSeguindoLayout.setVerticalGroup(
